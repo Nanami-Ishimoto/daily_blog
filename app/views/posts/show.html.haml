@@ -7,6 +7,11 @@
   %b Content:
   = @post.content
 
-= link_to 'Edit', edit_post_path(@post)
-\|
-= link_to 'Back', posts_path
+  %p
+    %b Comments:
+    - @comments.each do |comment|
+      =comment.content
+
+  =form_for @comment, url: post_path([@post, @comment]), method: :patch do |f|
+    =f.text_field :content
+    =f.submit 'Comment'

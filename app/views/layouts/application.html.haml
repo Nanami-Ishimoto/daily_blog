@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title DailyBlog
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %nav.navbar.navbar-expand.navbar-dark.bg-dark
+      = link_to "Daily Blog", "/", id: "logo", class: "navbar-brand"
+      %ul.navbar-nav.ml-auto
+        %li.nav-item
+          = link_to "Blog", posts_path, class: "nav-link"
+        -if current_user
+          %li.nav-item
+            = link_to "My Posts", login_posts_path, class: "nav-link"
+          %li.nav-item
+            = link_to "Edit User", edit_user_registration_path, class: "nav-link"
+          %li.nav-item
+            = link_to "Sign-out", destroy_user_session_path, method: :delete, class: "nav-link"
+        -else
+          %li.nav-item
+            = link_to "Sign-in", new_user_session_path, class: "nav-link"
+    .container
+      = yield

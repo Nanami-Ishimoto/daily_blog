@@ -1,0 +1,23 @@
+%h1 Listing posts
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Title
+      %th Content
+      %th
+      %th
+      %th
+
+  %tbody
+    - @posts.each do |post|
+      %tr
+        %td= post.title
+        %td= post.content
+        %td= link_to 'Show', [:login, post]
+        %td= link_to 'Edit', edit_login_post_path(post)
+        %td= link_to 'Destroy', [:login, post], method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Post', new_login_post_path
